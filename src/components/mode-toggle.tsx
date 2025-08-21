@@ -16,11 +16,9 @@ export function ModeToggle() {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Avoid SSR/client mismatch by only reading theme after mount
   useEffect(() => setMounted(true), []);
 
   if (!mounted) {
-    // Render a stable placeholder so SSR === CSR
     return (
       <Button variant="outline" size="icon" aria-label="Toggle theme" disabled>
         {/* neutral icon to keep markup stable */}
