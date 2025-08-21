@@ -1,8 +1,12 @@
 import { ModeToggle } from '@/components/mode-toggle';
-import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { SignInButton, SignOutButton } from '@/components/auth-buttons';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/auth';
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+
   return (
     <main className="p-6 space-y-6">
       <div className="flex items-center justify-between">
@@ -15,9 +19,7 @@ export default function Home() {
           <CardTitle>Looks great in light & dark</CardTitle>
         </CardHeader>
         <CardContent className="space-x-2">
-          <Button>Primary</Button>
-          <Button variant="secondary">Secondary</Button>
-          <Button variant="outline">Outline</Button>
+          {session ? <SignOutButton /> : <SignInButton />}
         </CardContent>
       </Card>
     </main>
