@@ -1,19 +1,20 @@
 'use client';
 
 import { signIn, signOut } from 'next-auth/react';
+import { Button } from '@/components/ui/button';
 
 export function SignInButton() {
   return (
-    <button onClick={() => signIn('google')} className="border px-4 py-2 rounded">
+    <Button onClick={() => signIn('google', { callbackUrl: '/' })} variant="outline">
       Sign in with Google
-    </button>
+    </Button>
   );
 }
 
 export function SignOutButton() {
   return (
-    <button onClick={() => signOut()} className="border px-4 py-2 rounded">
+    <Button variant={'outline'} onClick={() => signOut({ callbackUrl: '/' })}>
       Sign out
-    </button>
+    </Button>
   );
 }
